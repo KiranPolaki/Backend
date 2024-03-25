@@ -41,6 +41,7 @@ const videoSchema = new Schema(
   { timestamps: true }
 );
 
+//TODO: Know more about aggregate paggination/aggreation pipelines
 videoSchema.plugin(mongooseAggregatePaginate);
 
 export const Video = mongoose.model("Video", videoSchema);

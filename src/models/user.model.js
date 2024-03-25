@@ -52,6 +52,7 @@ const userSchema = new Schema(
 
 // userSchema.pre("save",()=>{}); //not preffered cause arrow functions dont know the context or dont have this(keyword)
 
+//TODO: more about isModified and bcrypt
 userSchema.pre("save", async function (next) {
   if (!this.isModified("password")) return next();
   this.password = bcrypt.hash(this.password, 10);
@@ -77,6 +78,7 @@ userSchema.methods.generateAccessToken = function () {
   );
 };
 
+//TODO: Learn mmore about the use case of the refresh token
 userSchema.methods.generateRefreshToken = function () {
   return jwt.sign(
     {
