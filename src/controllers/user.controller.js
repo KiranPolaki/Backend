@@ -17,7 +17,7 @@ const registerUser = asyncHandler(async (req, res) => {
 
   // * Get user details
   const { username, email, fullname, password } = req.body;
-  console.log("mail: ", email);
+  // console.log("mail: ", email);
 
   // * validation
   // TODO: use ZOD for verification
@@ -28,7 +28,7 @@ const registerUser = asyncHandler(async (req, res) => {
   }
 
   // * Check if user already exist
-  const existedUser = User.findOne({ $or: [{ username }, { email }] });
+  const existedUser = await User.findOne({ $or: [{ username }, { email }] });
   if (existedUser) {
     throw new ApiError(409, "User with email or Username already exists");
   }
@@ -49,7 +49,6 @@ const registerUser = asyncHandler(async (req, res) => {
   if (!avatar) {
     throw new ApiError(400, "Avatar file is required");
   }
-
   // * Create user object - create entry in DB
   const user = await User.create({
     fullname,
