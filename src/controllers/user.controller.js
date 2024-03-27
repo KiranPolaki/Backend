@@ -22,7 +22,7 @@ const registerUser = asyncHandler(async (req, res) => {
   // * validation
   // TODO: use ZOD for verification
   if (
-    [fullname, emmail, username, password].some((field) => field?.trim() === "")
+    [fullname, email, username, password].some((field) => field?.trim() === "")
   ) {
     throw new ApiError();
   }
