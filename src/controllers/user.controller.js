@@ -36,7 +36,15 @@ const registerUser = asyncHandler(async (req, res) => {
   // * Handle images
   //req.files came from multer
   const avatarLocalPath = req.files?.avatar[0]?.path;
-  const coverImageLocalPath = req.files?.coverImage[0]?.path;
+  let coverImageLocalPath;
+  if (
+    req.files &&
+    Array.isArray(req.files.coverImage) &&
+    req.files.coverImage.length > 0
+  ) {
+    coverImageLocalPath = req.files.coverImage[0].path;
+  }
+
   // console.log(req, "req");
   // console.log(req.files, "req-files");
   if (!avatarLocalPath) {
